@@ -12,5 +12,6 @@ class MainActivity : DrawerActivity() {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(activityMainBinding.root)
+        addActivityTitle("Home - HydrateNow")
     }
 }

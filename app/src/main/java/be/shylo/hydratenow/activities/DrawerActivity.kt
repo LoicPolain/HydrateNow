@@ -1,5 +1,6 @@
 package be.shylo.hydratenow.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,6 +9,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import be.shylo.hydratenow.R
 import com.google.android.material.navigation.NavigationView
@@ -33,10 +35,24 @@ open class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        drawerLayout.closeDrawer(GravityCompat.START)
+        when (item.itemId){
+            R.id.homePath -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            else -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
+
         return false
     }
 
-    private fun addActivityTitle(title: String){
+    public fun addActivityTitle(title: String){
         supportActionBar?.setTitle(title)
     }
 }

@@ -1,3 +1,15 @@
 Sources:
     Youtube:
-        -
+        -https://www.youtube.com/watch?v=F6ScDP1EpLE
+    Splashscreen:
+        -https://lottiefiles.com/animations/water-glass-with-alarm-animation-ikxifBZhmo
+        -https://github.com/airbnb/lottie-android
+    Images:
+        -https://www.flaticon.com/free-icon/drink-water_6774894
+        -https://www.freepik.com/icon/register_3456388
+        -https://www.flaticon.com/fr/icone-gratuite/authentification_3966194
+        -https://www.flaticon.com/free-icon/forgot-password_6195696
+    Colors:
+        -https://color.adobe.com/nl/purple-gradient-color-theme-14335627/
+    Firebase:
+        -https://firebase.google.com/

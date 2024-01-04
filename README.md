@@ -1,6 +1,7 @@
 Sources:
     Youtube:
         -https://www.youtube.com/watch?v=F6ScDP1EpLE
+        -https://www.youtube.com/playlist?list=PL3aehgbHFgW_vdqhl5lfYzv0QaUETYoWE
     Splashscreen:
         -https://lottiefiles.com/animations/water-glass-with-alarm-animation-ikxifBZhmo
         -https://github.com/airbnb/lottie-android

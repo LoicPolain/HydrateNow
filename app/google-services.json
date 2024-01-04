@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "870970497510",
+    "project_id": "hydratenow-15ac6",
+    "storage_bucket": "hydratenow-15ac6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870970497510:android:bd744868ac63f2a0a41e27",
+        "android_client_info": {
+          "package_name": "be.shylo.hydratenow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGmyscAZ5j0O_4ulU5KvaAItztJ1mKGVI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

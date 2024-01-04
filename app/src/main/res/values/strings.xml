@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HydrateNow</string>
+    <string name="menu_open">Menu open</string>
+    <string name="menu_close">Menu close</string>
+</resources>

@@ -16,12 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HydrateNow"
         tools:targetApi="31">
+
         <service android:name=".services.WaterService"
             android:enabled="true"
             android:exported="true"
             >
 
         </service>
+
         <activity
             android:name=".activities.DrawerActivity"
             android:exported="false" />

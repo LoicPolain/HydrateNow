@@ -23,7 +23,7 @@ class WaterService : Service() {
         fun addDrunkWater(drunkWater: Float) {
             drunkAmountWaterLiter += drunkWater
         }
-        private var drunkAmountWaterLiter: Float = 5f;
+        private var drunkAmountWaterLiter: Float = 0f;
         private const val NOTIFICATION_ID = 1
     }
 

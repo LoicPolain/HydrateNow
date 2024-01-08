@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat
 import be.shylo.hydratenow.R
 import be.shylo.hydratenow.databinding.ActivityMainBinding
 import be.shylo.hydratenow.services.WaterService
-import be.shylo.hydratenow.services.WaterService.Companion.INTAKE
 
 class MainActivity : DrawerActivity() {
     private lateinit var activityMainBinding: ActivityMainBinding
@@ -28,7 +27,7 @@ class MainActivity : DrawerActivity() {
 
         addWaterBtn = findViewById(R.id.waterBtn)
         addWaterBtn.setOnClickListener {
-            launchWaterService(0.025f)
+            launchWaterService(0.25f)
         }
 
         initWaterService()

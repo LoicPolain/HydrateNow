@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--General-->
+    <string name="app_name">HydrateNow</string>
+    <!--Drawer menu-->
+    <string name="menu_open">Open menu</string>
+    <string name="menu_close">Sluit menu</string>
+    <string name="home">Home</string>
+    <!--ForgotPswd activity-->
+    <string name="forgot_password">Wachtwoord vergeten</string>
+    <string name="e_mail_address">E-mailadres</string>
+    <string name="recover">Herstellen</string>
+    <string name="recovery_e_mail_has_been_send">Herstel-e-mail is verzonden!</string>
+    <string name="recovery_failed">Recovery failed!</string>
+    <string name="please_enter_an_e_mail">Gelieve een e-mailadres in te vullen!</string>
+    <string name="please_enter_a_valid_e_mail">Gelieve een geldig e-mailadres in te vullen!</string>
+    <!--Launch activity-->
+    <string name="stay_hydrated">Blijf gehydrateerd</string>
+    <string name="login">Inloggen</string>
+    <string name="register">Registreren</string>
+    <!--Login activity-->
+    <string name="password">Wachtwoord</string>
+    <string name="login_successful">Inloggen succesvoll!</string>
+    <string name="login_failed">Inloggen mislukt!</string>
+    <string name="please_enter_a_valid_password">Gelieve een geldig wachtwoord in te vullen!</string>
+    <!--main activity-->
+    <string name="drink_water">Drink water</string>
+    <!--Register activity-->
+    <string name="create_account">Maak account</string>
+    <string name="username">Gebruikersnaam</string>
+    <string name="confirm_password">Bevestig wachtwoord</string>
+    <string name="registration_failed">Registratie mislukt!</string>
+    <string name="registration_successful">Registratie succesvol!</string>
+    <string name="please_enter_a_valid_username">Gelieve een geldige gebruikersnaam in te vullen!</string>
+    <string name="the_password_need_to_be_at_least_8_characters_long">Het wachtwoord moet minstens 8 karakters lang zijn!</string>
+    <string name="both_passwords_need_to_match">Beide wachtwoorden moeten hetzelfde zijn!</string>
+    <!--Notifications-->
+    <string name="don_t_forget_to_drink_water_you_have_currently_drunk">Vergeet niet om water te drinken! Je hebt momenteel een hoeveelheid water gedronken van</string>
+    <string name="your_water_amount_has_been_reset">Uw watermeterstand is gereset!</string>
+    <string name="initialized_your_water_tracking_you_have_currently_drunk_2f">Uw watermeterstand werd geïnitialiseerd! Je hebt momenteel een hoeveelheid water gedronken van %.2f</string>
+
+
+</resources>

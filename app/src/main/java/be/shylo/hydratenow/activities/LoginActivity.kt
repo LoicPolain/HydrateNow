@@ -27,6 +27,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        auth = Firebase.auth
+
         emailEditText = findViewById(R.id.emailLoginEditTextEmailAddress)
         passwordEditText = findViewById(R.id.passwordLoginEditTextPassword)
         loginBtn = findViewById(R.id.loginBtn)
@@ -34,12 +36,14 @@ class LoginActivity : AppCompatActivity() {
         prograssBar = findViewById(R.id.loginProgressBar)
 
         val currentUserEmail = intent.getStringExtra("currentUserEmail")
-
         if (!currentUserEmail.isNullOrEmpty()){
             emailEditText.setText(currentUserEmail)
         }
-
-        auth = Firebase.auth
+        val currentUserPswd = intent.getStringExtra("currentUserPswd")
+        if (!currentUserPswd.isNullOrEmpty()){
+            passwordEditText.setText(currentUserPswd)
+            loginBtnClicked()
+        }
 
         loginBtn.setOnClickListener {
             loginBtnClicked()
@@ -52,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun forgotPswdBtnClicked() {
-        val intent = Intent(this@LoginActivity, ForgotPswdActivity::class.java)
+        val intent = Intent(this, ForgotPswdActivity::class.java)
         intent.putExtra("currentUserEmail", emailEditText.text.toString().trim())
         startActivity(intent)
     }
@@ -72,9 +76,10 @@ class LoginActivity : AppCompatActivity() {
                     prograssBar.visibility = View.GONE
                     loginBtn.isEnabled = true
                     forgotPswdBtn.isEnabled = true
-                    Toast.makeText(applicationContext,"Login successful!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,
+                        getString(R.string.login_successful), Toast.LENGTH_LONG).show()
 
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
@@ -82,7 +87,8 @@ class LoginActivity : AppCompatActivity() {
                     prograssBar.visibility = View.GONE
                     loginBtn.isEnabled = true
                     forgotPswdBtn.isEnabled = true
-                    Toast.makeText(applicationContext,"Login failed!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,
+                        getString(R.string.login_failed), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -92,11 +98,11 @@ class LoginActivity : AppCompatActivity() {
         val email: String = emailEditText.text.toString().trim();
 
         if (email.isBlank()) {
-            emailEditText.setError("Please, enter a valid e-mail1!")
+            emailEditText.setError(getString(R.string.please_enter_an_e_mail))
             emailEditText.requestFocus()
         }
         else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailEditText.setError("Please, enter a valid e-mail2!")
+            emailEditText.setError(getString(R.string.please_enter_a_valid_e_mail))
             emailEditText.requestFocus()
         }
         else return email
@@ -106,7 +112,7 @@ class LoginActivity : AppCompatActivity() {
     private fun verifyPswd(): String{
         val pswd: String = passwordEditText.text.toString().trim();
         if (pswd.isBlank()) {
-            passwordEditText.setError("Please, enter a valid password!")
+            passwordEditText.setError(getString(R.string.please_enter_a_valid_password))
             passwordEditText.requestFocus()
         }
         else return pswd

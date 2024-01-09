@@ -52,7 +52,8 @@ class ForgotPswdActivity : AppCompatActivity() {
                 if (task.isSuccessful){
                     prograssBar.visibility = View.GONE
                     forgotPswdBtn.isEnabled = true
-                    Toast.makeText(applicationContext,"Recovery e-mail has been send!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,
+                        getString(R.string.recovery_e_mail_has_been_send), Toast.LENGTH_LONG).show()
 
                     val intent = Intent(this, LoginActivity::class.java)
                     intent.putExtra("currentUserEmail", verifiedEmail)
@@ -62,7 +63,8 @@ class ForgotPswdActivity : AppCompatActivity() {
                 else {
                     prograssBar.visibility = View.GONE
                     forgotPswdBtn.isEnabled = true
-                    Toast.makeText(applicationContext,"Recovery failed!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,
+                        getString(R.string.recovery_failed), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -72,11 +74,11 @@ class ForgotPswdActivity : AppCompatActivity() {
         val email: String = emailEditText.text.toString().trim();
 
         if (email.isBlank()) {
-            emailEditText.setError("Please, enter a valid e-mail1!")
+            emailEditText.setError(getString(R.string.please_enter_an_e_mail))
             emailEditText.requestFocus()
         }
         else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailEditText.setError("Please, enter a valid e-mail2!")
+            emailEditText.setError(getString(R.string.please_enter_a_valid_e_mail))
             emailEditText.requestFocus()
         }
         else return email

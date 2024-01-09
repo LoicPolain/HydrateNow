@@ -32,7 +32,8 @@ class WaterService : Service() {
             set(value) {
                 field = value
             }
-        private const val NOTIFICATION_ID = 1
+        private const val REMINDER_NOTIFICATION_ID = 1
+        private const val RESET_NOTIFICATION_ID = 1
     }
 
     private val notificationManager by lazy {
@@ -59,7 +60,8 @@ class WaterService : Service() {
         //If >=API 26 then createNotificationChannel Else no need for notification channels since they were introduced in Android 8.0 (API level 26)
         val channelId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { createNotificationChannel() } else ""
         val notificationBuilder = getNotificationBuilder(pendingIntent, channelId)
-        startForeground(NOTIFICATION_ID, notificationBuilder.build())
+        startForeground(REMINDER_NOTIFICATION_ID, notificationBuilder.build())
+        startForeground(REMINDER_NOTIFICATION_ID, notificationBuilder.build())
         return notificationBuilder
     }
 
@@ -77,9 +79,9 @@ class WaterService : Service() {
 
         serviceHandler.postDelayed({
             sendReminderNotification()
-            notificationManager.cancel(NOTIFICATION_ID)
-            notificationBuilder.setContentText("Don't forget to drink water! You have currently drunk %.2f".format(drunkAmountWaterLiter))
-            notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
+            notificationManager.cancel(REMINDER_NOTIFICATION_ID)
+            notificationBuilder.setContentText(getString(R.string.don_t_forget_to_drink_water_you_have_currently_drunk) + " %.2f".format(drunkAmountWaterLiter) +"L")
+            notificationManager.notify(REMINDER_NOTIFICATION_ID, notificationBuilder.build())
         }, duration)
     }
 
@@ -101,10 +103,10 @@ class WaterService : Service() {
         serviceHandler.postDelayed({
             resetMidnight()
             drunkAmountWaterLiter = 0f
-            notificationManager.cancel(2)
+            notificationManager.cancel(RESET_NOTIFICATION_ID)
             notificationBuilder
-                .setContentText("Your water amount has been reset!")
-            notificationManager.notify(2, notificationBuilder.build())
+                .setContentText(getString(R.string.your_water_amount_has_been_reset))
+            notificationManager.notify(RESET_NOTIFICATION_ID, notificationBuilder.build())
         }, duration)
     }
 
@@ -129,7 +131,7 @@ class WaterService : Service() {
 
     private fun getNotificationBuilder(pendingIntent: PendingIntent, channelId: String): Builder {
         return NotificationCompat.Builder(this, channelId)
-            .setContentText("Initialized your water tracking! You have currently drunk %.2f".format(drunkAmountWaterLiter))
+            .setContentText(getString(R.string.initialized_your_water_tracking_you_have_currently_drunk_2f).format(drunkAmountWaterLiter) + "L")
             .setSmallIcon(R.drawable.baseline_local_drink_24)
             .setContentIntent(pendingIntent)
             .setOngoing(false)

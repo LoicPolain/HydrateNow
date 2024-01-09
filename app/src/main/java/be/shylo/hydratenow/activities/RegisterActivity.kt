@@ -1,5 +1,6 @@
 package be.shylo.hydratenow.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
@@ -10,6 +11,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import be.shylo.hydratenow.R
 import be.shylo.hydratenow.model.User
+import be.shylo.hydratenow.model.UserFireBAse
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -61,7 +63,8 @@ class RegisterActivity : AppCompatActivity() {
                 else {
                     prograssBar.visibility = View.GONE
                     registerBtn.isEnabled = true
-                    Toast.makeText(applicationContext,"Registration failed!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,
+                        getString(R.string.registration_failed), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -70,18 +73,24 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun saveAdditionalUserData() {
         user.id = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        usersRef.child(user.id).setValue(user) { databaseError, databaseReference ->
+        val userFireBAse: UserFireBAse = UserFireBAse(user.id, user.email, user.username)
+        usersRef.child(user.id).setValue(userFireBAse) { databaseError, databaseReference ->
             if (databaseError == null) {
-                // Successful write to the database
-                // You can consider it as the onComplete callback
                 prograssBar.visibility = View.GONE
                 registerBtn.isEnabled = true
-                Toast.makeText(applicationContext,"Registration successful!", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,
+                    getString(R.string.registration_successful), Toast.LENGTH_LONG).show()
+
+                //redirect the user to the login screen
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.putExtra("currentUserEmail", user.email)
+                intent.putExtra("currentUserPswd", user.password)
+                startActivity(intent)
             } else {
-                // Handle the error
                 prograssBar.visibility = View.GONE
                 registerBtn.isEnabled = true
-                Toast.makeText(applicationContext,"Registration failed!", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,
+                    getString(R.string.registration_failed), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -89,7 +98,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun verifyUsername(){
         val username: String = usernameEditText.text.toString().trim()
         if (username.isBlank()){
-            usernameEditText.setError("Please, enter a valid username!")
+            usernameEditText.setError(getString(R.string.please_enter_a_valid_username))
             usernameEditText.requestFocus()
         }
         else user.username = username
@@ -98,11 +107,11 @@ class RegisterActivity : AppCompatActivity() {
     private fun verifyEmail(){
         val email: String = emailEditText.text.toString().trim()
         if (email.isBlank()) {
-            emailEditText.setError("Please, enter a valid e-mail!")
+            emailEditText.setError(getString(R.string.please_enter_an_e_mail))
             emailEditText.requestFocus()
         }
-        else if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailEditText.setError("Please, enter a valid e-mail!")
+        else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailEditText.setError(getString(R.string.please_enter_a_valid_e_mail))
             emailEditText.requestFocus()
         }
         else user.email = email
@@ -112,20 +121,20 @@ class RegisterActivity : AppCompatActivity() {
         val pswd: String = passwordEditText.text.toString().trim()
         val pswdConfirm: String = passwordConfirmEditText.text.toString().trim();
         if (pswd.isBlank()) {
-            passwordEditText.setError("Please, enter a valid password!")
+            passwordEditText.setError(getString(R.string.please_enter_a_valid_password))
             passwordEditText.requestFocus()
         }
         else if (pswd.length < 8) {
-            passwordEditText.setError("The password need to be at least 8 characters long!")
+            passwordEditText.setError(getString(R.string.the_password_need_to_be_at_least_8_characters_long))
             passwordEditText.requestFocus()
         }
 
         else if (pswdConfirm.isBlank()) {
-            passwordConfirmEditText.setError("Please, enter a valid password!")
+            passwordConfirmEditText.setError(getString(R.string.please_enter_a_valid_password))
             passwordConfirmEditText.requestFocus()
         }
         else if (!pswdConfirm.equals(pswd)) {
-            passwordConfirmEditText.setError("Both passwords need to match!")
+            passwordConfirmEditText.setError(getString(R.string.both_passwords_need_to_match))
             passwordConfirmEditText.requestFocus()
         }
         else user.password = pswd

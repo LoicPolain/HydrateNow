@@ -14,8 +14,8 @@
             <shape>
                 <stroke
                     android:color="@color/lightLightLightPurple"
-                    android:width="10dp"/>
-                <solid android:color="@color/lightPurple"/>
+                    android:width="4dp"/>
+                <solid android:color="@color/purple"/>
                 <corners android:radius="90dp"/>
 
             </shape>

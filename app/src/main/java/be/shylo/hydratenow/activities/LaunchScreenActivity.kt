@@ -28,12 +28,12 @@ class LaunchScreenActivity : AppCompatActivity() {
     }
 
     private fun loginBtnClicked(){
-        val intent = Intent(this@LaunchScreenActivity, LoginActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 
     private fun registerBtnClicked(){
-        val intent = Intent(this@LaunchScreenActivity, RegisterActivity::class.java)
+        val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }
 }

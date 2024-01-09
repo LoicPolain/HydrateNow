@@ -9,9 +9,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import be.shylo.hydratenow.R
-import be.shylo.hydratenow.model.User
-import be.shylo.hydratenow.model.UserFireBAse
+import be.shylo.hydratenow.model.UserFireBaseViewModel
+import be.shylo.hydratenow.model.UserViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -29,7 +30,7 @@ class RegisterActivity : AppCompatActivity() {
     private val database = FirebaseDatabase.getInstance("https://hydratenow-15ac6-default-rtdb.europe-west1.firebasedatabase.app/")
     private  val usersRef = database.getReference("users")
 
-    private var user: User = User()
+    private lateinit var user: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +42,8 @@ class RegisterActivity : AppCompatActivity() {
         passwordConfirmEditText = findViewById(R.id.passwordConfirmEditTextPassword)
         registerBtn = findViewById(R.id.registerBtn)
         prograssBar = findViewById(R.id.progressBar)
+
+        user = ViewModelProvider(this).get(UserViewModel::class.java)
 
         auth = Firebase.auth
 
@@ -73,8 +76,8 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun saveAdditionalUserData() {
         user.id = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        val userFireBAse: UserFireBAse = UserFireBAse(user.id, user.email, user.username)
-        usersRef.child(user.id).setValue(userFireBAse) { databaseError, databaseReference ->
+        val userFireBaseViewModel: UserFireBaseViewModel = UserFireBaseViewModel(user.id, user.email, user.username)
+        usersRef.child(user.id).setValue(userFireBaseViewModel) { databaseError, databaseReference ->
             if (databaseError == null) {
                 prograssBar.visibility = View.GONE
                 registerBtn.isEnabled = true

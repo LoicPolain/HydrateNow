@@ -1,12 +1,14 @@
 package be.shylo.hydratenow.model
 
-class User constructor(
+import androidx.lifecycle.ViewModel
+
+class UserViewModel constructor(
     var id: String,
     var username: String,
     var email: String,
     var password: String
-) {
-    // Empty (default) constructor
+): ViewModel() {
+
     constructor() : this("", "", "", "")
 
     fun isValid(): Boolean {

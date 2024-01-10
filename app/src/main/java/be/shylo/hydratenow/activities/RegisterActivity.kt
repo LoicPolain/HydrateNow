@@ -11,8 +11,8 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import be.shylo.hydratenow.R
-import be.shylo.hydratenow.model.UserFireBaseViewModel
 import be.shylo.hydratenow.model.UserViewModel
+import be.shylo.hydratenow.model.data.User
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -30,7 +30,7 @@ class RegisterActivity : AppCompatActivity() {
     private val database = FirebaseDatabase.getInstance("https://hydratenow-15ac6-default-rtdb.europe-west1.firebasedatabase.app/")
     private  val usersRef = database.getReference("users")
 
-    private lateinit var user: UserViewModel
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
         registerBtn = findViewById(R.id.registerBtn)
         prograssBar = findViewById(R.id.progressBar)
 
-        user = ViewModelProvider(this).get(UserViewModel::class.java)
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
         auth = Firebase.auth
 
@@ -57,10 +57,10 @@ class RegisterActivity : AppCompatActivity() {
         verifyEmail()
         verifyPswd()
 
-        if (user.isValid()){
+        if (userViewModel.isValid()){
             prograssBar.visibility = View.VISIBLE;
             registerBtn.isEnabled = false
-            auth.createUserWithEmailAndPassword(user.email, user.password).addOnCompleteListener(this){
+            auth.createUserWithEmailAndPassword(userViewModel.email, userViewModel.password).addOnCompleteListener(this){
                 task ->
                 if (task.isSuccessful) saveAdditionalUserData()
                 else {
@@ -75,9 +75,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun saveAdditionalUserData() {
-        user.id = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        val userFireBaseViewModel: UserFireBaseViewModel = UserFireBaseViewModel(user.id, user.email, user.username)
-        usersRef.child(user.id).setValue(userFireBaseViewModel) { databaseError, databaseReference ->
+        userViewModel.id = auth.currentUser?.uid.toString()
+        val user = User(userViewModel.id, userViewModel.username, userViewModel.email)
+        userViewModel.addUser(user)
+
+        usersRef.child(userViewModel.id).setValue(user) { databaseError, databaseReference ->
             if (databaseError == null) {
                 prograssBar.visibility = View.GONE
                 registerBtn.isEnabled = true
@@ -86,8 +88,8 @@ class RegisterActivity : AppCompatActivity() {
 
                 //redirect the user to the login screen
                 val intent = Intent(this, LoginActivity::class.java)
-                intent.putExtra("currentUserEmail", user.email)
-                intent.putExtra("currentUserPswd", user.password)
+                intent.putExtra("currentUserEmail", userViewModel.email)
+                intent.putExtra("currentUserPswd", userViewModel.password)
                 startActivity(intent)
             } else {
                 prograssBar.visibility = View.GONE
@@ -104,7 +106,7 @@ class RegisterActivity : AppCompatActivity() {
             usernameEditText.setError(getString(R.string.please_enter_a_valid_username))
             usernameEditText.requestFocus()
         }
-        else user.username = username
+        else userViewModel.username = username
     }
 
     private fun verifyEmail(){
@@ -117,7 +119,7 @@ class RegisterActivity : AppCompatActivity() {
             emailEditText.setError(getString(R.string.please_enter_a_valid_e_mail))
             emailEditText.requestFocus()
         }
-        else user.email = email
+        else userViewModel.email = email
     }
 
     private fun verifyPswd(){
@@ -140,7 +142,7 @@ class RegisterActivity : AppCompatActivity() {
             passwordConfirmEditText.setError(getString(R.string.both_passwords_need_to_match))
             passwordConfirmEditText.requestFocus()
         }
-        else user.password = pswd
+        else userViewModel.password = pswd
     }
 
 }

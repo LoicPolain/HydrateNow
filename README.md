@@ -22,4 +22,12 @@ Sources:
         -https://developer.android.com/reference/android/app/Service#startForeground(int,%20android.app.Notification)
     Permissions:
         -https://developer.android.com/guide/topics/permissions/overview
-    
+    DropdownMenu:
+        -https://www.youtube.com/watch?v=jXSNobmB7u4
+    Internationalisation:
+        -https://www.youtube.com/watch?v=kP1o8F9qWfs
+    JUnit testing:
+        -https://www.geeksforgeeks.org/unit-testing-in-android-using-junit/
+        -https://developer.android.com/training/testing/local-tests
+    Landscape:
+        -https://www.geeksforgeeks.org/how-to-create-landscape-layout-in-android-studio/

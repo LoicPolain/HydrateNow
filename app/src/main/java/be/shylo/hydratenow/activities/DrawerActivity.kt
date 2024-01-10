@@ -2,10 +2,8 @@ package be.shylo.hydratenow.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -13,6 +11,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import be.shylo.hydratenow.R
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 open class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawerLayout: DrawerLayout
@@ -40,6 +40,12 @@ open class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             R.id.homePath -> {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                finish()
+            }
+            R.id.logout -> {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                Firebase.auth.signOut()
                 finish()
             }
             else -> {

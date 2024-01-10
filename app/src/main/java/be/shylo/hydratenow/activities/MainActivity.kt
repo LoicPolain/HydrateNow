@@ -19,6 +19,9 @@ import androidx.core.content.ContextCompat
 import be.shylo.hydratenow.R
 import be.shylo.hydratenow.databinding.ActivityMainBinding
 import be.shylo.hydratenow.services.WaterService
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import kotlin.math.roundToInt
 
 class MainActivity : DrawerActivity() {
@@ -36,11 +39,21 @@ class MainActivity : DrawerActivity() {
 
     private var waterAmount: Float = 0.25f
 
+    private lateinit var auth: FirebaseAuth;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(activityMainBinding.root)
         addActivityTitle("Home - HydrateNow")
+
+        auth = Firebase.auth
+        if (auth.currentUser == null){
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        println("email: " + auth.currentUser?.email)
 
         initSpinner()
 

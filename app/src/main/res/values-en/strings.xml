@@ -39,4 +39,6 @@
     <string name="your_water_amount_has_been_reset">Your water amount has been reset!</string>
     <string name="initialized_your_water_tracking_you_have_currently_drunk_2f">Initialized your water tracking! You have currently drunk %.2f</string>
 
+    <string name="logout">Log out</string>
+
 </resources>

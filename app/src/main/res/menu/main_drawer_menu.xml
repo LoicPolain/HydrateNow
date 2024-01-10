@@ -18,10 +18,10 @@
             android:title="Item2" />
 
         <item
-            android:id="@+id/item3"
+            android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@android:drawable/btn_star_big_on"
-            android:title="Home" />
+            android:icon="@drawable/baseline_logout_24"
+            android:title="@string/logout" />
     </group>
 </menu>

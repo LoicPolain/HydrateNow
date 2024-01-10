@@ -38,6 +38,7 @@
     <string name="don_t_forget_to_drink_water_you_have_currently_drunk">Vergeet niet om water te drinken! Je hebt momenteel een hoeveelheid water gedronken van</string>
     <string name="your_water_amount_has_been_reset">Uw watermeterstand is gereset!</string>
     <string name="initialized_your_water_tracking_you_have_currently_drunk_2f">Uw watermeterstand werd geïnitialiseerd! Je hebt momenteel een hoeveelheid water gedronken van %.2f</string>
+    <string name="logout">Uitloggen</string>
 
 
 </resources>

@@ -31,3 +31,7 @@ Sources:
         -https://developer.android.com/training/testing/local-tests
     Landscape:
         -https://www.geeksforgeeks.org/how-to-create-landscape-layout-in-android-studio/
+    ORM:
+        -https://www.youtube.com/playlist?list=PLSrm9z4zp4mEPOfZNV9O-crOhoMa0G2-o
+    Screen density:
+        -https://stackoverflow.com/questions/28507609/image-resolution-for-mdpi-hdpi-xhdpi-and-xxhdpi

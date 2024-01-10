@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import be.shylo.hydratenow.model.data.dao.UserDao
 
-@Database(entities = [User::class], version = 1)
+@Database(entities = [User::class, WaterLog::class], version = 1)
 abstract class MyDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
 

@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <!--Allows an app to post notifications-->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!--Allows an app to access the DB-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"

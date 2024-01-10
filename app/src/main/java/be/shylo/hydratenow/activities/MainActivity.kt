@@ -16,8 +16,11 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import be.shylo.hydratenow.R
 import be.shylo.hydratenow.databinding.ActivityMainBinding
+import be.shylo.hydratenow.model.UserViewModel
+import be.shylo.hydratenow.model.data.User
 import be.shylo.hydratenow.services.WaterService
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -40,6 +43,8 @@ class MainActivity : DrawerActivity() {
     private var waterAmount: Float = 0.25f
 
     private lateinit var auth: FirebaseAuth;
+    private lateinit var userViewModel: UserViewModel
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -47,13 +52,11 @@ class MainActivity : DrawerActivity() {
         setContentView(activityMainBinding.root)
         addActivityTitle("Home - HydrateNow")
 
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         auth = Firebase.auth
-        if (auth.currentUser == null){
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        println("email: " + auth.currentUser?.email)
+        initUserInformation()
+
+
 
         initSpinner()
 
@@ -72,6 +75,20 @@ class MainActivity : DrawerActivity() {
         }
 
         initWaterService()
+    }
+
+    private fun initUserInformation() {
+        if (auth.currentUser == null){
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        val userId: String = auth.currentUser?.uid.toString()
+        val userUsername: String = ""
+        val userEmail: String = auth.currentUser?.email.toString()
+        user = User(userId, userUsername, userEmail)
+        println(user.toString())
+        userViewModel.checkUserInDB(user)
     }
 
     private fun initSpinner() {
@@ -130,7 +147,6 @@ class MainActivity : DrawerActivity() {
             else -> requestPermissionLauncher.launch(POST_NOTIFICATIONS)
         }
     }
-
 
     private fun launchWaterService(drunkWater: Float = 0f) {
         val serviceIntent = Intent(this, WaterService::class.java)

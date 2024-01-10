@@ -30,4 +30,13 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
             userRepo.addUser(user)
         }
     }
+
+    fun checkUserInDB(user: User){
+        GlobalScope.launch {
+            val temp_user = userRepo.findUserById(user.id)
+            println("hello there: " + temp_user.toString())
+            if (temp_user == null) addUser(user)
+        }
+
+    }
 }

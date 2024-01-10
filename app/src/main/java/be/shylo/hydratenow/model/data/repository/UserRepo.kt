@@ -8,4 +8,8 @@ class UserRepo(private val userDao: UserDao) {
     suspend fun addUser(user: User){
         userDao.addUser(user)
     }
+
+    suspend fun findUserById(userId: String): User? {
+        return userDao.findUserById(userId)
+    }
 }

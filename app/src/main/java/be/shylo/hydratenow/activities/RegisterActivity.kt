@@ -57,6 +57,8 @@ class RegisterActivity : AppCompatActivity() {
         verifyEmail()
         verifyPswd()
 
+        println("hello33: " + userViewModel.isValid())
+
         if (userViewModel.isValid()){
             prograssBar.visibility = View.VISIBLE;
             registerBtn.isEnabled = false

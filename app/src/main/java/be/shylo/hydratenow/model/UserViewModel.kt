@@ -5,12 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import be.shylo.hydratenow.model.data.MyDatabase
 import be.shylo.hydratenow.model.data.User
 import be.shylo.hydratenow.model.data.repository.UserRepo
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.values
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -28,7 +23,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun isValid(): Boolean {
-        return !(username.isBlank() && email.isBlank() && password.isBlank())
+        return (!username.isBlank() && !email.isBlank() && !password.isBlank())
     }
     fun addUser(user: User){
         GlobalScope.launch {

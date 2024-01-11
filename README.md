@@ -14,6 +14,7 @@ Sources:
         -https://color.adobe.com/nl/purple-gradient-color-theme-14335627/
     Firebase:
         -https://firebase.google.com/
+        -https://firebase.google.com/docs/auth/android/custom-auth
     Progressbar:
         -https://www.youtube.com/watch?v=buQPvBAx-RM
     Notifications:
@@ -32,6 +33,25 @@ Sources:
     Landscape:
         -https://www.geeksforgeeks.org/how-to-create-landscape-layout-in-android-studio/
     ORM:
+        -https://developer.android.com/jetpack/androidx/releases/room?hl=fr#kts
         -https://www.youtube.com/playlist?list=PLSrm9z4zp4mEPOfZNV9O-crOhoMa0G2-o
+        -https://developer.android.com/training/data-storage/room/relationships
+        -https://normanaspx.medium.com/android-room-how-works-one-to-many-relationship-example-e8a17531a3bb
+        -https://stackoverflow.com/questions/68894865/is-it-possible-to-have-multiple-files-dao-to-the-same-database-on-android
+        -https://stackoverflow.com/questions/58477818/best-way-to-instantiate-an-android-room-entity-object-for-insertion-without-spec
+        -https://developer.android.com/training/data-storage/room/async-queries?hl=fr
     Screen density:
         -https://stackoverflow.com/questions/28507609/image-resolution-for-mdpi-hdpi-xhdpi-and-xxhdpi
+    Coroutines:
+        -https://github.com/Kotlin/kotlinx.coroutines
+        -https://developer.android.com/topic/libraries/architecture/coroutines?hl=fr#viewmodelscope
+        -https://developer.android.com/kotlin/coroutines?hl=fr#kts
+        -https://developer.android.com/jetpack/androidx/releases/lifecycle
+        -https://developer.android.com/topic/libraries/architecture/coroutines?hl=fr
+    Charts:
+        -https://github.com/AnyChart/AnyChart-Android?tab=readme-ov-file
+        -https://github.com/AnyChart/AnyChart-Android/blob/master/sample/src/main/java/com/anychart/sample/charts/VerticalChartActivity.java
+        -https://github.com/AnyChart/AnyChart-Android/wiki/Getting-started
+    Viewmodel:
+        -https://www.youtube.com/watch?v=orH4K6qBzvE
+

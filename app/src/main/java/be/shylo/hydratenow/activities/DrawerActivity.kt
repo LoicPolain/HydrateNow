@@ -42,8 +42,13 @@ open class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 startActivity(intent)
                 finish()
             }
+            R.id.chartPath -> {
+                val intent = Intent(this, ChartActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
             R.id.logout -> {
-                val intent = Intent(this, LoginActivity::class.java)
+                val intent = Intent(this, SplashActivity::class.java)
                 startActivity(intent)
                 Firebase.auth.signOut()
                 finish()

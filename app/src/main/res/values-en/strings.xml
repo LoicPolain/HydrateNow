@@ -40,5 +40,6 @@
     <string name="initialized_your_water_tracking_you_have_currently_drunk_2f">Initialized your water tracking! You have currently drunk %.2f</string>
 
     <string name="logout">Log out</string>
+    <string name="daily_overview">Daily overview</string>
 
 </resources>

@@ -37,7 +37,7 @@
     <!--Notifications-->
     <string name="don_t_forget_to_drink_water_you_have_currently_drunk">Don\'t forget to drink water! You have currently drunk</string>
     <string name="your_water_amount_has_been_reset">Your water amount has been reset!</string>
-    <string name="initialized_your_water_tracking_you_have_currently_drunk_2f">Initialized your water tracking! You have currently drunk %.2f</string>
+    <string name="initialized_your_water_tracking">Initialized your water tracking!</string>
 
     <string name="logout">Log out</string>
     <string name="daily_overview">Daily overview</string>

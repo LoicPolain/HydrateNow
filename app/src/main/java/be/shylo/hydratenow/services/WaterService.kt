@@ -131,7 +131,7 @@ class WaterService : Service() {
 
     private fun getNotificationBuilder(pendingIntent: PendingIntent, channelId: String): Builder {
         return NotificationCompat.Builder(this, channelId)
-            .setContentText(getString(R.string.initialized_your_water_tracking_you_have_currently_drunk_2f).format(drunkAmountWaterLiter) + "L")
+            .setContentText(getString(R.string.initialized_your_water_tracking))
             .setSmallIcon(R.drawable.baseline_local_drink_24)
             .setContentIntent(pendingIntent)
             .setOngoing(false)

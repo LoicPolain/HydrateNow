@@ -17,6 +17,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import be.shylo.hydratenow.R
 import be.shylo.hydratenow.databinding.ActivityMainBinding
 import be.shylo.hydratenow.model.UserViewModel
@@ -27,6 +28,7 @@ import be.shylo.hydratenow.services.WaterService
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.util.Calendar
 import java.util.TimeZone
@@ -63,26 +65,32 @@ class MainActivity : DrawerActivity() {
         auth = Firebase.auth
         initUserInformation()
 
+        lifecycleScope.launch{
+            initWaterService()
+
+            WaterService.drunkAmountWaterLiter = waterLogViewModel.getTotalWaterAmount(auth.currentUser?.uid.toString())
+            println("hello: " + WaterService.drunkAmountWaterLiter)
+
+            waterAmountTextView = findViewById(R.id.waterAmountLiterTextView)
+            waterAmountTextView.setText("%.2f".format(WaterService.drunkAmountWaterLiter) + "L / " + "%.2f".format(WaterService.targetAmountWaterLiter) + "L")
+
+            percentTextView = findViewById(R.id.percentTextView)
+            percentTextView.setText("%.2f".format(WaterService.drunkAmountWaterLiter/WaterService.targetAmountWaterLiter*100) + " %")
+
+            watergoalProgressBar = findViewById(R.id.watergoalProgressBar)
+            watergoalProgressBar.progress = (WaterService.drunkAmountWaterLiter/WaterService.targetAmountWaterLiter*100).roundToInt()
+
+
+        }
 
 
         initSpinner()
-
-        waterAmountTextView = findViewById(R.id.waterAmountLiterTextView)
-        waterAmountTextView.setText("%.2f".format(WaterService.drunkAmountWaterLiter) + "L / " + "%.2f".format(WaterService.targetAmountWaterLiter) + "L")
-
-        percentTextView = findViewById(R.id.percentTextView)
-        percentTextView.setText("%.2f".format(WaterService.drunkAmountWaterLiter/WaterService.targetAmountWaterLiter*100) + " %")
-
-        watergoalProgressBar = findViewById(R.id.watergoalProgressBar)
-        watergoalProgressBar.progress = (WaterService.drunkAmountWaterLiter/WaterService.targetAmountWaterLiter*100).roundToInt()
 
         addWaterBtn = findViewById(R.id.waterBtn)
         addWaterBtn.setOnClickListener {
             updateWaterData()
             addWaterLogToDB()
         }
-
-        initWaterService()
     }
 
     private fun addWaterLogToDB() {
@@ -103,7 +111,6 @@ class MainActivity : DrawerActivity() {
         val userUsername: String = ""
         val userEmail: String = auth.currentUser?.email.toString()
         user = User(userId, userUsername, userEmail)
-        println(user.toString())
         userViewModel.checkUserInDB(user)
     }
 

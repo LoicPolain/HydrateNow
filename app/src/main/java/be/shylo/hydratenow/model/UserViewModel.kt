@@ -1,17 +1,22 @@
 package be.shylo.hydratenow.model
 
 import android.app.Application
-import android.provider.Settings.System.getString
 import androidx.lifecycle.AndroidViewModel
-import be.shylo.hydratenow.R
 import be.shylo.hydratenow.model.data.MyDatabase
 import be.shylo.hydratenow.model.data.User
 import be.shylo.hydratenow.model.data.repository.UserRepo
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.values
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application): AndroidViewModel(application) {
-    private val userRepo: UserRepo
+    private val database = FirebaseDatabase.getInstance("https://hydratenow-15ac6-default-rtdb.europe-west1.firebasedatabase.app/").reference
+    var userRepo: UserRepo
     var id: String = ""
     var username: String = ""
     var email: String = ""
@@ -34,9 +39,12 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     fun checkUserInDB(user: User){
         GlobalScope.launch {
             val temp_user = userRepo.findUserById(user.id)
-            println("hello there: " + temp_user.toString())
             if (temp_user == null) addUser(user)
         }
+    }
 
+    suspend fun findUserByid(userId: String): User? {
+        val user = userRepo.findUserById(userId)
+        return user
     }
 }

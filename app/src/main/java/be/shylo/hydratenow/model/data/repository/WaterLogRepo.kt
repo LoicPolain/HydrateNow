@@ -5,7 +5,7 @@ import be.shylo.hydratenow.model.data.WaterLog
 import be.shylo.hydratenow.model.data.dao.WaterLogDao
 
 class WaterLogRepo(private val waterLogDao: WaterLogDao) {
-    suspend fun addUser(waterLog: WaterLog){
+    suspend fun addWaterLog(waterLog: WaterLog){
         waterLogDao.addWaterLog(waterLog)
     }
 }

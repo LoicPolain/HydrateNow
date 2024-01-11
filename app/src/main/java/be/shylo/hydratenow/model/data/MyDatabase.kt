@@ -5,10 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import be.shylo.hydratenow.model.data.dao.UserDao
+import be.shylo.hydratenow.model.data.dao.WaterLogDao
 
-@Database(entities = [User::class, WaterLog::class], version = 1)
+@Database(entities = arrayOf(User::class, WaterLog::class) , version = 1)
 abstract class MyDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun waterLogDao(): WaterLogDao
 
     companion object{
         @Volatile

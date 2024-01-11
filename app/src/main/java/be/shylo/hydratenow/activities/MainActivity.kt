@@ -20,11 +20,16 @@ import androidx.lifecycle.ViewModelProvider
 import be.shylo.hydratenow.R
 import be.shylo.hydratenow.databinding.ActivityMainBinding
 import be.shylo.hydratenow.model.UserViewModel
+import be.shylo.hydratenow.model.WaterLogViewModel
 import be.shylo.hydratenow.model.data.User
+import be.shylo.hydratenow.model.data.WaterLog
 import be.shylo.hydratenow.services.WaterService
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import java.time.LocalDateTime
+import java.util.Calendar
+import java.util.TimeZone
 import kotlin.math.roundToInt
 
 class MainActivity : DrawerActivity() {
@@ -44,6 +49,7 @@ class MainActivity : DrawerActivity() {
 
     private lateinit var auth: FirebaseAuth;
     private lateinit var userViewModel: UserViewModel
+    private lateinit var waterLogViewModel: WaterLogViewModel
     private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +59,7 @@ class MainActivity : DrawerActivity() {
         addActivityTitle("Home - HydrateNow")
 
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        waterLogViewModel = ViewModelProvider(this).get(WaterLogViewModel::class.java)
         auth = Firebase.auth
         initUserInformation()
 
@@ -72,9 +79,18 @@ class MainActivity : DrawerActivity() {
         addWaterBtn = findViewById(R.id.waterBtn)
         addWaterBtn.setOnClickListener {
             updateWaterData()
+            addWaterLogToDB()
         }
 
         initWaterService()
+    }
+
+    private fun addWaterLogToDB() {
+        val defaultTimeZone: TimeZone = TimeZone.getDefault()
+        val calendar = Calendar.getInstance(defaultTimeZone)
+        val userId = auth.currentUser?.uid.toString()
+        val waterLog = WaterLog(0, waterAmount, calendar.timeInMillis, userId)
+        waterLogViewModel.addWaterLog(waterLog)
     }
 
     private fun initUserInformation() {
@@ -112,7 +128,7 @@ class MainActivity : DrawerActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+
             }
 
         }
@@ -150,7 +166,7 @@ class MainActivity : DrawerActivity() {
 
     private fun launchWaterService(drunkWater: Float = 0f) {
         val serviceIntent = Intent(this, WaterService::class.java)
-        serviceIntent.putExtra("addedWater", drunkWater)
+        //serviceIntent.putExtra("addedWater", drunkWater)
         WaterService.addDrunkWater(drunkWater)
         ContextCompat.startForegroundService(this, serviceIntent)
     }

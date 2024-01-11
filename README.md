@@ -30,6 +30,9 @@ Sources:
     JUnit testing:
         -https://www.geeksforgeeks.org/unit-testing-in-android-using-junit/
         -https://developer.android.com/training/testing/local-tests
+        -https://github.com/robolectric/robolectric
+        -https://robolectric.org/building-robolectric/
+        -https://medium.com/@wambuinjumbi/unit-testing-in-android-room-361bf56b69c5
     Landscape:
         -https://www.geeksforgeeks.org/how-to-create-landscape-layout-in-android-studio/
     ORM:
@@ -39,6 +42,7 @@ Sources:
         -https://normanaspx.medium.com/android-room-how-works-one-to-many-relationship-example-e8a17531a3bb
         -https://stackoverflow.com/questions/68894865/is-it-possible-to-have-multiple-files-dao-to-the-same-database-on-android
         -https://stackoverflow.com/questions/58477818/best-way-to-instantiate-an-android-room-entity-object-for-insertion-without-spec
+        -https://developer.android.com/training/data-storage/room/async-queries?hl=fr
         -https://developer.android.com/training/data-storage/room/async-queries?hl=fr
     Screen density:
         -https://stackoverflow.com/questions/28507609/image-resolution-for-mdpi-hdpi-xhdpi-and-xxhdpi
@@ -54,4 +58,9 @@ Sources:
         -https://github.com/AnyChart/AnyChart-Android/wiki/Getting-started
     Viewmodel:
         -https://www.youtube.com/watch?v=orH4K6qBzvE
+
+    chat.openai.com:
+        -https://chat.openai.com/share/53fea05a-029f-485a-a4b6-58dc916f7124
+        -https://chat.openai.com/share/b014d4de-eb7b-4037-93bb-84a061a8b96c
+        -https://chat.openai.com/share/d6adb176-c131-4fc1-8cfe-b0074f573f5e
 
